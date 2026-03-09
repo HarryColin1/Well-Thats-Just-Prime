@@ -4,34 +4,50 @@
 #include <catch2/generators/catch_generators_range.hpp>
 
 #include "../src/prime.hpp"
-#include <iostream>
 #include <vector>
 
 using namespace std;
 
-int main()
+Factorizer factorizer;
+
+TEST_CASE("Prime factorization works correctly")
 {
-    Factorizer factorizer;
-    int userNumber;
-
-    cout << "Enter a positive integer greater than 1: ";
-    cin >> userNumber;
-
-    vector<int> factors = factorizer.getPrimeFactors(userNumber);
-
-    if (factors.empty())
+    SECTION("Zero returns empty vector")
     {
-        cout << "No prime factors for numbers <= 1." << endl;
-    }
-    else
-    {
-        cout << "Prime factors of " << userNumber << " are: ";
-        for (int factor : factors)
-        {
-            cout << factor << " ";
-        }
-        cout << endl;
+        vector<int> result = factorizer.getPrimeFactors(0);
+        REQUIRE(result.empty());
     }
 
-    return 0;
+    SECTION("One returns empty vector")
+    {
+        vector<int> result = factorizer.getPrimeFactors(1);
+        REQUIRE(result.empty());
+    }
+
+    SECTION("100 returns [2,2,5,5]")
+    {
+        vector<int> result = factorizer.getPrimeFactors(100);
+        vector<int> expected = {2,2,5,5};
+        REQUIRE(result == expected);
+    }
+
+    SECTION("17 returns [17]")
+    {
+        vector<int> result = factorizer.getPrimeFactors(17);
+        vector<int> expected = {17};
+        REQUIRE(result == expected);
+    }
+
+    SECTION("24 returns [2,2,2,3]")
+    {
+        vector<int> result = factorizer.getPrimeFactors(24);
+        vector<int> expected = {2,2,2,3};
+        REQUIRE(result == expected);
+    }
+
+    SECTION("Negative number returns empty vector")
+    {
+        vector<int> result = factorizer.getPrimeFactors(-5);
+        REQUIRE(result.empty());
+    }
 }
