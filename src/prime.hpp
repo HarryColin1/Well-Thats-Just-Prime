@@ -1,3 +1,10 @@
-#include <string>
+#pragma once
+#include <vector>
 
-std::string prime();
+using namespace std;
+
+class Factorizer
+{
+public:
+    vector<int> getPrimeFactors(int number);
+};
