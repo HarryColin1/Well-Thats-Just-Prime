@@ -24,7 +24,7 @@ TEST_CASE("Prime factorization works correctly")
         REQUIRE(result.empty());
     }
 
-    SECTION("100 returns [2,2,5,5]")
+    SECTION("100 returns  [2,2,5,5]")
     {
         vector<int> result = factorizer.getPrimeFactors(100);
         vector<int> expected = {2,2,5,5};
